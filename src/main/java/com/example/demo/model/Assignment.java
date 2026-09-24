@@ -7,6 +7,7 @@ import lombok.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 @Setter
 @NoArgsConstructor
@@ -17,21 +18,22 @@ public class Assignment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long deadline;
+    private Integer id;
 
     @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
-    private String id2;
+    @Column(name = "description")
+    private String description;
 
-    @Column(nullable = false, unique = true)
-    private Timestamp id;
+    @Column(name = "deadline", nullable = false, unique = true)
+    private LocalDate deadline;
 
     @Column(name = "max_score", nullable = false)
     private Integer maxScore;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 
     @JsonIgnore

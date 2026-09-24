@@ -17,7 +17,7 @@ public class PullRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
     private String title;
@@ -32,11 +32,16 @@ public class PullRequest {
     private Timestamp createdAt;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "repository_id", nullable = false)
-    private List<Repository> repository;
+    private Repository repository;
 
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
+    private User author;
+
+    @ManyToOne
     @JoinColumn(name = "reviewer_id")
-    private User teacher;
+    private User reviewer;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDate;
 
 @Setter
 @NoArgsConstructor
@@ -21,6 +22,15 @@ public class Commit {
 
     @Column(nullable = false)
     private String message;
+
+    @Column(name = "lines_added", nullable = false)
+    private Integer linesAdded;
+
+    @Column(name = "lines_deleted", nullable = false)
+    private Integer linesDeleted;
+
+    @Column(name = "commit_date", nullable = false)
+    private LocalDate commitDate;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
