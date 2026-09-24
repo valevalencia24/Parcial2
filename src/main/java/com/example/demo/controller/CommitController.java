@@ -5,6 +5,7 @@ import com.example.demo.repository.ICommitRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,5 +20,14 @@ public class CommitController {
     @GetMapping
     public List<Commit> findAllCommits() {
         return commitRepository.findAll();
+    }
+
+    @GetMapping("/by-template")
+    public List<Commit> findByTemplateKeywordAndLines(@RequestParam("templateName") String templateName,
+                                                      @RequestParam("keyword") String keyword,
+                                                      @RequestParam("minLinesAdded") Integer minLinesAdded) {
+        return commitRepository
+                .findByRepository_ParentRepository_NameAndMessageContainingIgnoreCaseAndLinesAddedGreaterThan(
+                        templateName, keyword, minLinesAdded);
     }
 }

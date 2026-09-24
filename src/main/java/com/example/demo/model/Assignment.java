@@ -7,8 +7,9 @@ import lombok.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,18 +28,16 @@ public class Assignment {
     private String description;
 
     @Column(name = "deadline", nullable = false, unique = true)
-    private LocalDate deadline;
+    private LocalDateTime deadline;
 
     @Column(name = "max_score", nullable = false)
     private Integer maxScore;
 
     @ManyToOne
-    @JoinColumn(name = "classroom_id")
+    @JoinColumn(name = "classroom_id", nullable = false)
     private Classroom classroom;
 
     @JsonIgnore
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "assignment", cascade = CascadeType.ALL)
-    private Repository repositories;
+    @OneToMany(mappedBy = "assignment")
+    private List<Repository> repositories = new ArrayList<>();
 }

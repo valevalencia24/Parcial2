@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -29,7 +31,7 @@ public class PullRequest {
     private Integer prNumber;
 
     @Column(name = "created_at", nullable = false)
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

@@ -14,10 +14,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClassroomController {
 
+
     private final IClassroomRepository classroomRepository;
 
     @GetMapping
     public List<Classroom> findAllClassrooms() {
         return classroomRepository.findAll();
     }
+
+
+
 }

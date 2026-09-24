@@ -1,10 +1,16 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "repositories")
 public class Repository {
@@ -23,7 +29,7 @@ public class Repository {
     private Boolean isPrivate;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "assignment_id", nullable = false)
@@ -51,4 +57,4 @@ public class Repository {
 }
 
 
-}
+
